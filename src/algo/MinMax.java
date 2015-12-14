@@ -2,7 +2,6 @@ package algo;
 
 public class MinMax {
 
-	
 	private int min;
 	private int max;
 	/**
@@ -10,7 +9,9 @@ public class MinMax {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-
+		int[] t = {1,2,3};
+		
+		System.out.println();
 		
 	}
 	

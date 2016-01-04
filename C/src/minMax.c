@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
 void naiveminMax(float tab[], int n, float* max, float* min){
   int i = 0;
  

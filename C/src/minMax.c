@@ -6,9 +6,9 @@ void minMax(float tab[], int n, float* max, float* min){
   int i = 0;
 
   for(i = 0; i < n; i++){
-    if(tab[i] < *min)
+    if(&tab[i] < min)
       min = &tab[i];
-    if(tab[i] > *max)
+    if(&tab[i] > max)
       max = &tab[i];
   }
     

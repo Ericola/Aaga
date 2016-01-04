@@ -4,17 +4,29 @@ public class MinMax {
 
 	private int min;
 	private int max;
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		int[] t = {1,2,3};
-		
-		System.out.println();
-		
+
+	
+	public int getMin() {
+		return min;
+	}
+
+	public void setMin(int min) {
+		this.min = min;
+	}
+
+	public int getMax() {
+		return max;
+	}
+
+	public void setMax(int max) {
+		this.max = max;
 	}
 	
+	public void init(){
+		max = Integer.MAX_VALUE;
+		min = Integer.MIN_VALUE;
+	}
+
 	public void naive(int[] tab) {
 		min = max = tab[0];
 		for(int i = 1; i<tab.length;i++){

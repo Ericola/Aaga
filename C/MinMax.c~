@@ -1,4 +1,9 @@
 #include <stdio.h>
+<<<<<<< HEAD
+#include <stlib.h>
+
+
+=======
 #include <stdlib.h>
 
 
@@ -12,3 +17,4 @@ void minMax(int tab[], int n, int* min, int* max){
   }
 
 }
+>>>>>>> branch 'master' of https://github.com/Ericola/Aaga

@@ -6,7 +6,7 @@ public class Main {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-	int[] tab = {1,2,3};
+	float[] tab = {1,2,3};
 	MinMax m = new MinMax();
 	m.init();
 	m.naive(tab);

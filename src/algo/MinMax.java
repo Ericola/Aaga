@@ -2,32 +2,32 @@ package algo;
 
 public class MinMax {
 
-	private int min;
-	private int max;
+	private float min;
+	private float max;
 
 	
-	public int getMin() {
+	public float getMin() {
 		return min;
 	}
 
-	public void setMin(int min) {
+	public void setMin(float min) {
 		this.min = min;
 	}
 
-	public int getMax() {
+	public float getMax() {
 		return max;
 	}
 
-	public void setMax(int max) {
+	public void setMax(float max) {
 		this.max = max;
 	}
 	
 	public void init(){
-		max = Integer.MAX_VALUE;
-		min = Integer.MIN_VALUE;
+		max = Float.MAX_VALUE;
+		min = Float.MIN_VALUE;
 	}
 
-	public void naive(int[] tab) {
+	public void naive(float[] tab) {
 		min = max = tab[0];
 		for(int i = 1; i<tab.length;i++){
 			if(tab[i]<min){
@@ -39,7 +39,7 @@ public class MinMax {
 		}
 	}
 	
-	public void opti(int[] tab){
+	public void opti(float[] tab){
 		min = max = tab[tab.length - 1];
 		for(int i=0;i<tab.length - 1;i +=2){
 			if(tab[i] < tab[i+1]){

@@ -1,6 +1,12 @@
 #include <stdio.h>
+#include <unistd.h>
 #include <stdlib.h>
+#include <sys/time.h>
 #include <time.h>
+
+#include "timer.h"
+#define BILLION  1000000000L
+
 
 
 clock_t debut, fin;
@@ -64,15 +70,17 @@ void testOpti() {
 
 
 void comparatif() {
-  int i;
-  int j;
+  long i;
+  long j;
   float max;
   float min;
-  double dur1;
-  double dur2;
+
+  struct timespec start, stop;
+
+  init_timer;
   FILE* fichier = fopen("courbe.txt","w+");
-  for(j = 1;j<100000000;j+=1000000) {
-    printf("%d \n",j);
+  for(j = 1;j<1000000;j+=50000) {
+    printf("%ld \n",j);
     float tab[j];
     for(i = 0;i<j;i++) {
       srand(time(NULL)); 
@@ -80,17 +88,41 @@ void comparatif() {
     }
     max = tab[0];
     min = tab[0];
-    debut = clock();
+
+    /* if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
+      perror( "clock gettime" );
+      exit( EXIT_FAILURE );
+      }*/
+    first_step_timer;
     naiveminMax(tab,j,&max,&min);
-    fin = clock();
-    dur1 = (double)(fin-debut)/CLOCKS_PER_SEC;
+    second_step_timer;
+    /*if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
+      perror( "clock gettime" );
+      exit( EXIT_FAILURE );
+      }
+ 
+    double accum1 =( stop.tv_nsec - start.tv_nsec );
+    */
+    double accum1 = tim1;
+    
     max = tab[j-1];
     min = tab[j-1];
-    debut = clock();
+
+    /*if( clock_gettime( CLOCK_REALTIME, &start) == -1 ) {
+      perror( "clock gettime" );
+      exit( EXIT_FAILURE );
+      }*/
+    first_step_timer;
     optiMinMax(tab,j,&max,&min);
-    fin = clock();
-    dur2 = (double)(fin-debut)/CLOCKS_PER_SEC;
-    fprintf(fichier,"%d %f %f",j,dur1,dur2);
+    second_step_timer;
+    /*if( clock_gettime( CLOCK_REALTIME, &stop) == -1 ) {
+      perror( "clock gettime" );
+      exit( EXIT_FAILURE );
+      }
+      
+      double accum2 =  ( stop.tv_nsec - start.tv_nsec );*/
+    double accum2 = tim1;
+    fprintf(fichier,"%ld %f %f \n",j,accum1,accum2);
   }
   fclose(fichier);
 }

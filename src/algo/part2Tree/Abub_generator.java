@@ -1,4 +1,4 @@
-package algo;
+package algo.part2Tree;
 
 import java.util.ArrayList;
 import java.util.Random;

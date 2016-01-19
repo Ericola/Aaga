@@ -1,4 +1,4 @@
-package algo;
+package algo.part2Tree;
 
 import java.io.File;
 import java.io.FileWriter;

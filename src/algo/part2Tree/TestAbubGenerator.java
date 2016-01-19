@@ -1,4 +1,4 @@
-package algo;
+package algo.part2Tree;
 
 import java.io.FileWriter;
 import java.io.IOException;

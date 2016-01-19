@@ -1,4 +1,4 @@
-package algo;
+package algo.part2Tree;
 
 public class Main {
 	/**

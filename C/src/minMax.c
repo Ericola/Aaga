@@ -16,10 +16,11 @@ void naiveminMax(float tab[], int n, float* max, float* min){
   int i = 0;
  
   for(i = 0; i < n; i++){
-    if(tab[i] < *min)
-      *min = tab[i];
-    if(tab[i] > *max)
-      *max = tab[i];
+    float a = tab[i];
+    if(a < *min)
+      *min = a;
+    if(a > *max)
+      *max = a;
   }
     
 }
@@ -27,20 +28,22 @@ void naiveminMax(float tab[], int n, float* max, float* min){
 void optiMinMax(float tab[], int n, float* max, float* min) {
   int i;
   for(i=0;i<n-1;i+=2){
-    if(tab[i] < tab[i+1]){
-      if(tab[i] < *min){
-	*min = tab[i];
+    float a = tab[i];
+    float b = tab[i+1];
+    if(a < b){
+      if(a < *min){
+	*min = a;
       }
-      if(tab[i+1]> *max) {
-	*max = tab[i+1];
+      if(b> *max) {
+	*max = b;
       }	
     }
     else {
-      if(tab[i+1] < *min) {
-	*min = tab[i+1];
+      if(b < *min) {
+	*min = b;
       }
-      if(tab[i] > *max) {
-	*max = tab[i];
+      if(a > *max) {
+	*max = a;
       }
     }
   }
@@ -104,7 +107,7 @@ void comparatif() {
     double accum1 =( stop.tv_nsec - start.tv_nsec );
     */
     double accum1 = tim1;
-    
+    print_time("naive");
     max = tab[j-1];
     min = tab[j-1];
 
@@ -122,6 +125,7 @@ void comparatif() {
       
       double accum2 =  ( stop.tv_nsec - start.tv_nsec );*/
     double accum2 = tim1;
+    print_time("opti");
     fprintf(fichier,"%ld %f %f \n",j,accum1,accum2);
   }
   fclose(fichier);

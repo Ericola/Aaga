@@ -103,6 +103,7 @@ public class Abub implements Comparable<Abub>{
 	}
 
 	public int taille(){
+		
 		if(this.isLeaf())
 			return 1;
 		
@@ -125,14 +126,32 @@ public class Abub implements Comparable<Abub>{
 		if(this.equals(arg0))
 			return 0;
 		
+		if(this == null)
+			return -1;
+		
+		if(arg0 == null)
+			return 1;
+		
 		if(this.taille() < arg0.taille()) 
 			return -1;
-		else if(this.taille() == arg0.taille() && ((this.gauche.compareTo(arg0.gauche) == -1) )
-				|| (this.gauche.compareTo(arg0.gauche) == 0 && this.droit.compareTo(arg0.droit) == -1))
-			return -1;
-		else 
-			return 1;
-			
+//		else if(this.taille() == arg0.taille() && ((this.gauche.compareTo(arg0.gauche) == -1) )
+//				|| (this.gauche.compareTo(arg0.gauche) == 0 && this.droit.compareTo(arg0.droit) == -1))
+//			return -1;
+		//taille(A.gauche) = taille(B.gauche)
+		else if(this.taille() == arg0.taille()){
+			if(this.gauche != null && arg0.gauche != null){
+				if(this.gauche.compareTo(arg0.gauche) == -1)
+					return -1;				
+			}
+		}	
+		if(this.gauche != null && arg0.gauche != null){
+			if(this.gauche.compareTo(arg0.gauche) == 0)
+				if(this.droit != null && arg0.droit != null)
+					if(this.droit.compareTo(arg0.droit) == -1)
+						return -1;
+				
+		}		
+		return 1;
 	}
 	
 }

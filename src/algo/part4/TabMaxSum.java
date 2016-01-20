@@ -3,9 +3,9 @@ package algo.part4;
 public class TabMaxSum {
 
 
-	public static float naif(float[] tab){
-		float max = Float.MIN_VALUE;
-		float acc;
+	public static int naif(int[] tab){
+		int max = Integer.MIN_VALUE;
+		int acc;
 		for(int i =0;i<tab.length;i++){
 			acc = tab[i];
 			if(acc > max){
@@ -21,9 +21,9 @@ public class TabMaxSum {
 		return max;
 	}
 
-	public static float optiCheval(float[] tab, int g, int d){
-		float max = Float.MIN_VALUE;
-		float acc = 0;
+	public static int optiCheval(int[] tab, int g, int d){
+		int max = Integer.MIN_VALUE;
+		int acc = 0;
 		for(int i=(int) (Math.floor((g+d)/2))+1;i<=d;i++){
 			acc += tab[i];
 			if(acc>max){
@@ -40,7 +40,7 @@ public class TabMaxSum {
 		return max;
 	}
 
-	public static float opti(float[] tab, int g, int d){
+	public static int opti(int[] tab, int g, int d){
 		if(g>d){
 			return 0;
 		}
@@ -52,9 +52,9 @@ public class TabMaxSum {
 				return tab[g];
 			}
 		}
-		float max1 = opti(tab,g,(int)Math.floor((g+d)/2));
-		float max2 = opti(tab,(int)Math.floor((g+d)/2)+1,d);
-		float max3 = optiCheval(tab, g, d);
+		int max1 = opti(tab,g,(int)Math.floor((g+d)/2));
+		int max2 = opti(tab,(int)Math.floor((g+d)/2)+1,d);
+		int max3 = optiCheval(tab, g, d);
 
 		return Math.max(max3, Math.max(max1, max2));
 	}

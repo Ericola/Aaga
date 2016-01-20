@@ -14,7 +14,7 @@ ${BIN}/binarySearch: ${OBJ}/binarySearch.o
 	$(CC) -o $@ $^
 
 ${OBJ}/minMax.o:${SRC}/minMax.c
-	$(CC) -o $@ -c -O0 $< ${CFLAGS} -lrt
+	$(CC) -o $@ -c -O3 $< ${CFLAGS} -lrt
 
 ${OBJ}/binarySearch.o:${SRC}/binarySearch.c
 	$(CC) -o $@ -c -O0 $< ${CFLAGS} -lrt

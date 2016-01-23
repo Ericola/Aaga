@@ -39,6 +39,14 @@ public class MinMax {
 		}
 	}
 	
+	public static boolean contains(float[] tab, float value){
+		for(int i = 0; i < tab.length; i++)
+			if(tab[i] == value)
+				return true;
+		return false;
+						
+	}
+	
 	public void opti(float[] tab){
 		min = max = tab[tab.length - 1];
 		for(int i=0;i<tab.length - 1;i +=2){

@@ -21,24 +21,6 @@ int binary_search (float T[], float x, int n){
   return f;
 }
 
-int binary_search2 (float T[], float x, int n){
-  int d = 0, f = n, m = 0;
-
-  while (d < f){
-    m = (d + f)/2;
-
-    if(T[m] == x)
-      return m;
-
-    if(T[m] < x)
-      d = m+1;
-    else
-      f = m;
-  }
-
-  return -1;
-}
-
 int biased_binary_search(float T[], float x, int n){
   int d = 0, f = n, m = 0;
   
@@ -77,6 +59,26 @@ int skew_search(float T[], float x, int n){
   return f;
 }
 
+void triRapide(float* t, int size){
+  int en_desordre = 1;
+  int i,j;
+
+  for (i = 0; (i < size) && en_desordre; ++i)
+    {
+      en_desordre = 0;
+      for (j = 1; j < (size - i); ++j)
+	{
+	  if (t[j-1] > t[j])
+	    {
+	      int temp = t[j-1];
+	      t[j-1] = t[j];
+	      t[j] = temp;
+	      en_desordre = 1;
+	    }
+	}
+    }
+}
+
 void comparatif(){
   long i;
   long j;
@@ -85,50 +87,64 @@ void comparatif(){
   struct timespec start, stop;
 
   //FILE* fichier = fopen("courbeBinarySearch.txt", "w+");
-  for(j = 1; j < 500001; j+=50000){
+  for(j = 50000; j < 500001; j+=50000){
     printf("%ld \n",j);
-    float tab[j];
+    float* tab = (float*)malloc(sizeof(float)*j);
       
-    long binarySearchTime = 0;
-    long biaisedSearchTime = 0;
-    long skewSearchTime = 0;
+    double binarySearchTime = 0;
+    double biaisedSearchTime = 0;
+    double skewSearchTime = 0;
 
-    for(k = 0; k < 100; k++){
+    for(k = 0; k < 5; k++){
       for(i = 0;i<j;i++) {
 	srand(time(NULL)); 
-	do{
-	  test = (float)rand()/(float)RAND_MAX;
-	}while(binary_search2(tab, test, i) != -1);
+	test = (float)rand()/(float)RAND_MAX;
 	tab[i] = test;
       }
       int valueSearching = rand() /(RAND_MAX / (j - 1 + 1) + 1);
-
+      triRapide(tab, j);
       clock_gettime(CLOCK_REALTIME, &start);
       binary_search(tab, valueSearching,j);
       clock_gettime(CLOCK_REALTIME, &stop); 
-      binarySearchTime +=  stop.tv_nsec - start.tv_nsec;
+      binarySearchTime += (double)( stop.tv_nsec - start.tv_nsec );
 
       clock_gettime(CLOCK_REALTIME, &start);
       biased_binary_search(tab,valueSearching,j);
       clock_gettime(CLOCK_REALTIME, &stop);  
-      biaisedSearchTime += stop.tv_nsec - start.tv_nsec;
+      biaisedSearchTime +=(double)( stop.tv_nsec - start.tv_nsec );
 
       clock_gettime(CLOCK_REALTIME, &start);
       skew_search(tab,valueSearching,j);
       clock_gettime(CLOCK_REALTIME, &stop);  
-      skewSearchTime +=  stop.tv_nsec - start.tv_nsec;
+      skewSearchTime += (double)( stop.tv_nsec - start.tv_nsec );
     }
-    printf("time : binary_search %lu ", binarySearchTime/100);
-    printf("time : biased_binary_search %lu ", biaisedSearchTime/100);
-    printf("time : skew_search %lu \n",skewSearchTime/100);
+    printf("time : binary_search %lf ", binarySearchTime/(5*1000));
+    printf("time : biased_binary_search %lf ", biaisedSearchTime/(5*1000));
+    printf("time : skew_search %lf \n",skewSearchTime/(5*1000));
 
   }
   //fclose(fichier);
 }
 
+void test(){
+  float* tab = (float*)malloc(sizeof(float)*5);
+  tab[0] = 3;
+  tab[1] = 2;
+  tab[2] = 5;
+  tab[3] = 4;
+  tab[4] = 6;
+  int i = 0;
+  triRapide(tab, 5);
+  for(i = 0; i < 5; i++){
+    printf("%lf\n", tab[i]);
+  }
+
+}
+
 
 int main(int argc, char** argv){
   comparatif();
+  //test();
   return 0;
 
 }

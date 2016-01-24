@@ -7,7 +7,13 @@ import java.util.Random;
 import algo.part2Tree.Abub_generator;
 
 public class Main {
-
+	
+	/**
+	 * Execute les deux algorithmes sur des tableaux allant de taille 1 à 1000000 
+	 * remplis de valeurs aléatoires entre -50 et 49
+	 * et écris le temps d'exécution dans un fichier
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		
 		String Filename = "CourbeTMS.txt";
@@ -44,10 +50,6 @@ public class Main {
 				e.printStackTrace();
 			}
 		}
-		
-		//int[] tab = {-1,9,-3,12,-5,4};
-		//System.out.println("naif "+TabMaxSum.naif(tab));
-		//System.out.println("opti "+TabMaxSum.opti(tab,0,tab.length-1));
 	}
 
 }

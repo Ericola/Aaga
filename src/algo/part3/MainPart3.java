@@ -8,6 +8,12 @@ import java.util.Random;
 
 public class MainPart3 {
 
+	
+	/**
+	 * Execute les 3 algorithmes sur des tableaux de float aléatoires de taille 1 à 1000000
+	 * et ecris dans un fichier les résultats
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		String Filename = "CourbePart3.txt";
 

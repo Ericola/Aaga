@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Abub_generator {
-	public ArrayList<Double> nbTree;
+	public ArrayList<Double> nbTree; // liste contenant le nombre d'arbres possibles pour chaque taille
 	public static int cpt = 0;
 	public static boolean DEBUG = false;
 
@@ -14,6 +14,10 @@ public class Abub_generator {
 		this.nbTree.add(1.0);
 	}
 
+	/**
+	 * Remplit le tableau nbTree de 1 jusqu'a nb
+	 * @param nb
+	 */
 	public void fillNb(int nb){
 		for(int i = 2; i < nb; i++){
 			double x = 0;
@@ -22,10 +26,16 @@ public class Abub_generator {
 				x += nbTree.get(k)* nbTree.get(i - 1 - k);
 			}
 			nbTree.add(x);
-			//System.out.println("Arbre de taille " + i + " : " + x);
 		}
 	}
 
+	/**
+	 * Genere un arbre unaire-binaire de numero tmp de taille n
+	 * Si tmp != -1 alors on genere avec un numero aleatoire de taille n
+	 * @param n
+	 * @param tmp
+	 * @return
+	 */
 	public Abub generate(int n, int tmp){
 		if(n == 1){
 			cpt++;
@@ -85,15 +95,12 @@ public class Abub_generator {
 			}
 		}
 		if(borneInf == 2){
-			//System.out.println("val : " + val + " numFilsGauche : " + numFilsGauche);
 			numFilsGauche = 1;
 		}
 		if(borneSup == 2){
-			//System.out.println("val : " + val + " numFilsdroit : " + numFilsDroit);
 			numFilsDroit = 1;
 		}
 		cpt++;
-		//System.out.println(borneInf + " " + numFilsGauche + " " + borneSup + " " + numFilsDroit);
 		Abub a =  new Abub(cpt, generate(borneInf, numFilsGauche), generate(borneSup, numFilsDroit));
 		a.getGauche().setParent(a);
 		a.getDroit().setParent(a);
@@ -101,6 +108,12 @@ public class Abub_generator {
 
 	}
 
+	/**
+	 * Algorithme naiveMinMax sur les arbres. Renvoie un tableau d'arbre contenant en premiere case 
+	 * le minimum et en deuximeme case le maximum des arbres du tableau
+	 * @param abub
+	 * @return
+	 */
 	public static Abub[] naiveMinMax(Abub[] abub){
 		Abub tab[] = new Abub[2];
 		Abub min = abub[0];
@@ -119,6 +132,12 @@ public class Abub_generator {
 		return tab;
 	}
 
+	/**
+	  * Algorithme optiMinMax sur les arbres. Renvoie un tableau d'arbre contenant en premiere case 
+	 * le minimum et en deuximeme case le maximum des arbres du tableau
+	 * @param abub
+	 * @return
+	 */
 	public static Abub[] optiMinMax(Abub[] abub){
 		Abub tab[] = new Abub[2];
 		Abub min = abub[abub.length - 1];
@@ -147,7 +166,14 @@ public class Abub_generator {
 		tab[1] = min;
 		return tab;
 	}
-
+	
+	/**
+	 * Genere un tableau d'arbres unaire binaire. Les arbres sont de taille sizeTree et le nombre 
+	 * d'arbres générés est de taille sizeArray
+	 * @param sizeArray
+	 * @param sizeTree
+	 * @return
+	 */
 	public static Abub[] generateRandomArrayTree(int sizeArray, int sizeTree){
 		Abub tab[] = new Abub[sizeArray];
 		Abub_generator a = new Abub_generator();

@@ -5,6 +5,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Classe d'implémentation d'un arbre unaire binaire
+ * @author Eric
+ *
+ */
 public class Abub implements Comparable<Abub>{
 	public static String FILENAME="abub.dot";
 	public int id;
@@ -102,6 +107,10 @@ public class Abub implements Comparable<Abub>{
 		return gauche == null && droit == null;
 	}
 
+	/**
+	 * Renvoie la taille de l'arbre
+	 * @return
+	 */
 	public int taille(){
 		
 		if(this.isLeaf())
@@ -114,12 +123,15 @@ public class Abub implements Comparable<Abub>{
 		else 
 			return 1 + droit.taille();
 	}
+	
+	
 	/** Ordre total
 	 *  A <bin B si et seulement si
 	 *     taille(A.gauche) < taille(B.gauche)
 	 *  ou
 	 *         taille(A.gauche) = taille(B.gauche)
 	 *     et (A.gauche < B.gauche ou (A.gauche = B.gauche et A.droit < B.droit)	
+	 *     
 	 */
 	@Override
 	public int compareTo(Abub arg0) {
@@ -134,10 +146,6 @@ public class Abub implements Comparable<Abub>{
 		
 		if(this.taille() < arg0.taille()) 
 			return -1;
-//		else if(this.taille() == arg0.taille() && ((this.gauche.compareTo(arg0.gauche) == -1) )
-//				|| (this.gauche.compareTo(arg0.gauche) == 0 && this.droit.compareTo(arg0.droit) == -1))
-//			return -1;
-		//taille(A.gauche) = taille(B.gauche)
 		else if(this.taille() == arg0.taille()){
 			if(this.gauche != null && arg0.gauche != null){
 				if(this.gauche.compareTo(arg0.gauche) == -1)

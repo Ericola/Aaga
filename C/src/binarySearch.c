@@ -3,7 +3,6 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <time.h>
-
 #define BILLION  1000000000L
 
 int binary_search (float T[], float x, int n){
@@ -86,8 +85,8 @@ void comparatif(){
   float test;
   struct timespec start, stop;
 
-  //FILE* fichier = fopen("courbeBinarySearch.txt", "w+");
-  for(j = 50000; j < 500001; j+=50000){
+  FILE* fichier = fopen("courbeBinarySearch.txt", "w+");
+  for(j = 1; j < 300000; j+=10000){
     printf("%ld \n",j);
     float* tab = (float*)malloc(sizeof(float)*j);
       
@@ -121,35 +120,21 @@ void comparatif(){
     printf("time : binary_search %lf ", binarySearchTime/(5*1000));
     printf("time : biased_binary_search %lf ", biaisedSearchTime/(5*1000));
     printf("time : skew_search %lf \n",skewSearchTime/(5*1000));
-
+    fprintf(fichier,"%ld %f %f %f \n",j,binarySearchTime/(5*1000), biaisedSearchTime/(5*1000), skewSearchTime/(5*1000));
   }
-  //fclose(fichier);
+  fclose(fichier);
 }
-
-void test(){
-  float* tab = (float*)malloc(sizeof(float)*5);
-  tab[0] = 3;
-  tab[1] = 2;
-  tab[2] = 5;
-  tab[3] = 4;
-  tab[4] = 6;
-  int i = 0;
-  triRapide(tab, 5);
-  for(i = 0; i < 5; i++){
-    printf("%lf\n", tab[i]);
-  }
-
-}
-
 
 int main(int argc, char** argv){
   comparatif();
-  //test();
   return 0;
 
 }
 
 
+
+
+ 
 
 
  

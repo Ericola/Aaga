@@ -35,6 +35,7 @@ public class MainPart3 {
 			startTime = System.nanoTime();
 			System.out.println("biased: "+ BinarySearch.binaryBiasedSearch(tab, x));
 			long duration2 = System.nanoTime() - startTime;
+			startTime = System.nanoTime();
 			System.out.println("skew: "+ BinarySearch.skewSearch(tab, x));
 			long duration3 = System.nanoTime() - startTime;
 			try {

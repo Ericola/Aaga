@@ -13,7 +13,7 @@ public class TestMinMax {
 		MinMax m = new MinMax();
 		m.init();
 		
-		for(int j = 1;j<120002;j+=20000) {
+		for(int j = 1;j<200002;j+=20000) {
 			tab = new float[j];
 			Random r = new Random();
 			r.setSeed(System.currentTimeMillis());
@@ -29,7 +29,7 @@ public class TestMinMax {
 			startTime = System.nanoTime();
 			m.opti(tab);
 			long duration2 = System.nanoTime() - startTime;
-			System.out.println(j + " " + "naive : " + duration + ", opti : "+ duration2  );
+			System.out.println(j +" "+ duration +" "+ duration2  );
 		}
 	}
 
